@@ -1,0 +1,36 @@
+easy_admin:
+  
+  site-name: Conference unLibro
+  
+  design:
+    menu:
+      - { route: 'homepage', label : 'Ir al sitio', icon: 'home' }
+      - { label: 'Sections' }
+      - { entity: 'Conference', label: 'Conferences', icon: 'map-marker' }
+      - { entity: 'Comment', label: 'Comments', icon: 'comments' }
+    form_theme:
+      - '@EasyAdmin/form/bootstrap_4.html.twig'
+      - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+  entities:
+    
+    Conference:
+      class: App\Entity\Conference
+      label: Conference
+      
+    Comment:
+      class: App\Entity\Comment
+      label: Comment
+      list:
+        fields:
+          - author
+          - { property: 'email', type: email }
+          - { property: 'createdAt', type: 'datetime' }
+        sort: [ 'createdAt', 'ASC' ]
+        filters: [ 'conference' ]
+      edit:
+        fields:
+          - { property: 'conference' }
+          - { property: 'createdAt', type: 'datetime', type_options: { attr: { readonly: true } } }
+          - 'author'
+          - { property: 'email', type: 'email' }
+          - { property: 'text', type: 'fos_ckeditor' }
