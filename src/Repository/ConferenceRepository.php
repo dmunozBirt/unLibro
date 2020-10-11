@@ -58,4 +58,5 @@ class ConferenceRepository extends ServiceEntityRepository
         ;
     }
     */
+		
 }
